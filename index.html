@@ -15,6 +15,41 @@
         from { top: 2%; }
         to { top: 6%; }
       }
+      .clock {
+        margin-top: 3em;
+        margin-left: 1em;
+        font-family: Roboto, sans-serif;
+        font-weight: lighter;
+        color: #eee;
+      }
+      #hclock { font-size: 2em; }
+      #dclock { letter-spacing: 0.25em; }
+      .text {
+        float: left;
+        top: 1em;
+        font-size: 1em;
+        font-family: sans-serif;
+        text-shadow: 2px 2px #0134172a;
+      }
+      .text a {
+        text-decoration: none;
+        color: green;
+      }
+      .menu {
+        position: absolute;
+        top: 1em;
+        list-style: none;
+      }
+      .menu ul, .menu li {
+        float: left;
+        list-style: none;
+        margin: 0;
+        padding: 5px;
+        overflow: hidden;
+      }
+      .menu li:hover {
+        color: red;
+      }
       .hex {
         float: left;
         position: absolute;
@@ -26,8 +61,79 @@
       }
       .hex:hover { color: black; }
     </style>
+    <link rel="stylesheet" type="text/css" href="glitchy.css" />
   </head><body>
+    <div class="clock">
+      <div id="hclock" class="glitch" data-text=""></div>
+      <br />
+      <div id="dclock"></div>
+    </div>
     <img class="nasha" src="nashas.png" />
+    <div class="text menu">
+      <ul>
+        <li onclick="showC('main')">Main</li>
+        <li onclick="showC('links')">Links</li>
+      </ul>
+    </div>
+    <div class="text content" id="main" style="display: none">
+      Hey, I'm Nasha.<br /><br />
+      Things I do:<br />
+      <ul>
+        <li>Stream on <a href="https://twitch.tv/hiramiya">Twitch</a></li>
+        <li>Write dumb tools and bots</li>
+        <li>Write public documentation</li>
+        <li>Commit stuff to <a href="https://github.com/hiramiya">GitHub</a>..</li>
+        <li>And occasionally, I <a href="https://twitter.com/hiramiyaa">tweet</a>!</li>
+      </ul>
+      <br />
+      If you like what I do, you can throw spare change my way via <a href="https://ko-fi.com/hiramiya">ko-fi</a>, but <i>please</i> look after yourself first!
+    </div>
+    <div class="text content" id="links" style="display:none">
+      Hey, I'm Nasha.<br /><br />
+      Places you can find me:<br />
+      <ul>
+        <li><a href="https://twitch.tv/hiramiya">Twitch</a></li>
+        <li><a href="https://github.com/hiramiya">GitHub</a></li>
+        <li><a href="https://twitter.com/hiramiyaa">Twitter</a></li>
+        <li><a href="https://keybase.io/hiramiya">Keybase</a></li>
+        <li><a href="https://reddit.com/user/hiramiya">Reddit</a></li>
+        <li><a href="https://s.team/u/hiramiya">Steam</a></li>
+      </ul>
+    </div>
     <div class="hex">0x2EA2A</div>
+    <script>
+      var date = new Date("Feb 2, 2020 20:02:02").getTime();
+      function clock() {
+        x = 60;
+        var now = new Date().getTime();
+        var diff = date - now;
+        var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        var hdays = days.toString(16);
+        var hours = Math.floor(
+          (diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        //var mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        document.getElementById("hclock").innerHTML = "0x" + hdays + " days";
+        document
+          .getElementById("hclock")
+          .setAttribute("data-text", "0x" + hdays + " days");
+        document.getElementById("dclock").innerHTML = days + "d " + hours + "h";
+        if (diff < 0) {
+          clearInterval(x);
+          document.getElementById("hclock").innerHTML = "";
+          document.getElementById("hclock").setAttribute("data-text", "");
+          document.getElementById("dclock").innerHTML = "";
+        }
+        setTimeout(clock, x * 1000);
+      }
+      clock();
+    </script>
+    <script>
+      function showC(page){
+        document.getElementById('main').style.display = "none";
+        document.getElementById('links').style.display = "none";
+        document.getElementById(page).style.display = "";
+      }
+    </script>
   </body>
 </html>
