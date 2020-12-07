@@ -1,0 +1,33 @@
+<html><!-- ここで何をしているのですか、馬鹿？ --><head>
+    <title>Hiramiya</title><meta charset="UTF-8" />
+    <style>
+      html { background: #663399; }
+      body { overflow: hidden; }
+      img.nasha {
+        float: right;
+        animation: 2s infinite alternate imgloop;
+        position: absolute;
+        right: 2em;
+        bottom: 0;
+        transform-origin: bottom right;
+      }
+      @keyframes imgloop {
+        from { top: 2%; }
+        to { top: 6%; }
+      }
+      .hex {
+        float: left;
+        position: absolute;
+        bottom: 5;
+        font-size: 1em;
+        font-family: sans-serif;
+        color: transparent;
+        text-shadow: 2px 2px #0134172a;
+      }
+      .hex:hover { color: black; }
+    </style>
+  </head><body>
+    <img class="nasha" src="nashas.png" />
+    <div class="hex">0x2EA2A</div>
+  </body>
+</html>
